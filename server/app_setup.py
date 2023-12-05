@@ -11,12 +11,19 @@ import os
 
 load_dotenv()  # take environment variables from .env.
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///theater.db"
+app = Flask(
+    __name__,
+    static_url_path="",
+    static_folder="../client/build",
+    template_folder="../client/build",
+)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.secret_key = os.environ.get("APP_SECRET")
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
+app.config["PROPAGATE_EXCEPTIONS"] = True
 
 # Here you can globally configure all the ways you want to allow JWTs to
 # be sent to your web application. By default, this will be only headers.
@@ -44,6 +51,6 @@ ma = Marshmallow(app)
 #! flask-bcrypt
 bcrypt = Bcrypt(app)
 #! flask-restful setup
-api = Api(app, prefix="/api/v1")
+api = Api(app)#, prefix="/api/v1")
 #! Flask-jwt-extended setup
 jwt = JWTManager(app)

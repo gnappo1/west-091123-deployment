@@ -13,8 +13,10 @@ from routes.auth.login import Login
 from routes.auth.me import Me
 from routes.auth.refresh import Refresh
 from routes.auth.check_token import CheckToken
+from flask import render_template
+
 #! Routes
-api.add_resource(Welcome, "/")
+# api.add_resource(Welcome, "/")
 #! GET/POST Productions routes
 api.add_resource(Productions, "/productions")
 #! GET/PATCH/DELETE Production routes
@@ -35,6 +37,7 @@ api.add_resource(Refresh, "/refresh")
 api.add_resource(CheckToken, "/check")
 #! No need for a logout route in this configuration!
 
+
 # Register a callback function that loads a user from your database whenever
 # a protected route is accessed. This should return any python object on a
 # successful lookup, or None if the lookup failed for any reason (for example
@@ -50,6 +53,14 @@ def user_lookup_callback(_jwt_header, jwt_data):
 def handle_404(error):
     response = {"message": error.description}
     return response, error.code
+
+
+@app.route("/")
+@app.route("/productions/<int:id>")
+@app.route("/productions/<int:id>/edit")
+@app.route("/productions/new")
+def index(id=0):
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

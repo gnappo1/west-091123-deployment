@@ -6,7 +6,7 @@ function ProductionCard({production}) {
     const {title, budget, genre, image, id} = production
     return (
       <Card id={id}>
-        <Link to={`/productions/${id}`}> 
+        <Link to={`/production-detail/${id}`}> 
           <div>
             <h2>{title}</h2>
             <p>{genre}</p>

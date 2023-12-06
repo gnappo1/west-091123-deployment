@@ -56,9 +56,9 @@ def handle_404(error):
 
 
 @app.route("/")
-@app.route("/productions/<int:id>")
-@app.route("/productions/<int:id>/edit")
-@app.route("/productions/new")
+@app.route("/production-detail/<int:id>")
+@app.route("/edit-production/<int:id>")
+@app.route("/new-production")
 def index(id=0):
     return render_template("index.html")
 

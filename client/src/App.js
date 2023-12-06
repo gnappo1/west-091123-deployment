@@ -105,7 +105,7 @@ function App() {
 
   const handleEdit = (production) => {
     setProductionEdit(production)
-    history.push({pathname: `/productions/edit/${production.id}`, state:{production}})
+    history.push({pathname: `/edit-production/${production.id}`, state:{production}})
   }
 
 
@@ -123,13 +123,13 @@ function App() {
     <Navigation updateUser={updateUser} user={user}/>
     <div>{error}</div>
       <Switch>
-        <Route  path='/productions/new'>
+        <Route  path='/new-production'>
           <ProductionForm addProduction={addProduction} handleNewError={handleNewError}/>
         </Route>
-        <Route  path='/productions/edit/:id'>
+        <Route  path='/edit-production/:id'>
           <ProductionEdit updateProduction={updateProduction} production_edit={production_edit} handleNewError={handleNewError}/>
         </Route>
-        <Route path='/productions/:prod_id'>
+        <Route path='/production-detail/:prod_id'>
             <ProductionDetail handleEdit={handleEdit} deleteProduction={deleteProduction} handleNewError={handleNewError}/>
         </Route>
         <Route exact path='/'>

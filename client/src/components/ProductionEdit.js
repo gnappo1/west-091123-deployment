@@ -71,7 +71,7 @@ function ProductionFormEdit({updateProduction, handleNewError}) {
         if (res.ok) {
           res.json().then(data => {
             updateProduction(data)
-            history.push(`/productions/${id}`)
+            history.push(`/production-detail/${id}`)
           })
         } else {
           res.json().then(errorObj => handleNewError(errorObj.message))

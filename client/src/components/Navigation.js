@@ -29,7 +29,7 @@ function Navigation({updateUser, user, handleNewError}) {
                 <li onClick={() => setMenu(!menu)}>x</li>
                 { user ? (
                   <>
-                    <li><Link to='/productions/new'>New Production</Link></li>
+                    <li><Link to='/new-production'>New Production</Link></li>
                     <li><Link to='/'> Home</Link></li>
                     <li onClick={handleLogout}> Logout </li>
                   </>

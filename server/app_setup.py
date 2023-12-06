@@ -17,8 +17,11 @@ app = Flask(
     static_folder="../client/build",
     template_folder="../client/build",
 )
+if os.environ.get("ENVIRONMENT") == "production":
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///theater.db"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.secret_key = os.environ.get("APP_SECRET")
@@ -51,6 +54,6 @@ ma = Marshmallow(app)
 #! flask-bcrypt
 bcrypt = Bcrypt(app)
 #! flask-restful setup
-api = Api(app)#, prefix="/api/v1")
+api = Api(app)  # , prefix="/api/v1")
 #! Flask-jwt-extended setup
 jwt = JWTManager(app)
